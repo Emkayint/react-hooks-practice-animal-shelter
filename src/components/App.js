@@ -4,19 +4,28 @@ import Filters from "./Filters";
 import PetBrowser from "./PetBrowser";
 
 function App() {
-  const [pets, setPets] = useState([]);
-  const [filters, setFilters] = useState({ type: "all" });
-  const [paths, setPaths] = useState('pets')
+  let [pets, setPets] = useState([]);
+  let [filters, setFilters] = useState({ type: "all" });
+  let [paths, setPaths] = useState('pets')
+  console.log(filters)
   useEffect(()=> {
     fetch(`http://localhost:3001/${paths}`)
     .then(res => res.json())
     .then(res => setPets( res) )
-  }, [])
+  }, [paths])
+
+ 
 
   function filterFecth(data){
     setFilters({type : data})
+    if( data === 'all'){
+      setPaths(() => paths = 'pets')
+    } else {
+      setPaths(() => paths =`pets?type=${filters.type}`)
+    }
+    console.log(`myPath ${paths}`)
   }
-
+  console.log(`my filter ${filters.type}`)
   return (
     <div className="ui container">
       <header>

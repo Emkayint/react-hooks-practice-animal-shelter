@@ -3,12 +3,19 @@ import React, { useState } from "react";
 function Filters({ filterFecth }) {
   const [myFilter, setMyFilter] = useState('all')
 
+  function updateFilter(e){
+    setMyFilter(e.target.value)
+  }
+
+  function updateFilterValue(){
+    filterFecth(myFilter)
+  }
 
   return (
-    <div className="ui form" onChange={e => setMyFilter(e.target.value)}>
+    <div className="ui form" >
       <h3>Animal type</h3>
       <div className="field">
-        <select name="type" id="type" aria-label="type">
+        <select name="type" id="type" aria-label="type" onChange={ updateFilter }>
           <option value="all">All</option>
           <option value="cat">Cats</option>
           <option value="dog">Dogs</option>
@@ -17,7 +24,7 @@ function Filters({ filterFecth }) {
       </div>
 
       <div className="field">
-        <button className="ui secondary button" onClick={() => filterFecth(myFilter)}>Find pets</button>
+        <button className="ui secondary button" onClick={updateFilterValue}>Find pets</button>
       </div>
     </div>
   );
