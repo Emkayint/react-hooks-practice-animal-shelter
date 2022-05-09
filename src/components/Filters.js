@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Filters() {
+function Filters({ filterFecth }) {
+  const [myFilter, setMyFilter] = useState('all')
+
+
   return (
-    <div className="ui form">
+    <div className="ui form" onChange={e => setMyFilter(e.target.value)}>
       <h3>Animal type</h3>
       <div className="field">
         <select name="type" id="type" aria-label="type">
@@ -14,7 +17,7 @@ function Filters() {
       </div>
 
       <div className="field">
-        <button className="ui secondary button">Find pets</button>
+        <button className="ui secondary button" onClick={() => filterFecth(myFilter)}>Find pets</button>
       </div>
     </div>
   );

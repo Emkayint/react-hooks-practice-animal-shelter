@@ -3,13 +3,8 @@ import React, {useState, useEffect} from "react";
 import Pet from "./Pet";
 
 
-function PetBrowser() {
-  const [petsFromDb, setPetsFromDb] = useState([])
-  useEffect(()=> {
-    fetch(`http://localhost:3001/pets`)
-    .then(res => res.json())
-    .then(res => setPetsFromDb( res) )
-  }, [])
+function PetBrowser({ petsFromDb }) {
+  
 
   const petsToDisplay = petsFromDb.map(pet => (
     <Pet 
